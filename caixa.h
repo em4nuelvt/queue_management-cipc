@@ -15,12 +15,14 @@ typedef struct caixa {
 } Caixa;
 
 Caixa* criar_caixa(int id);
-void abrir_caixa(Caixa* caixa);
-void fechar_caixa(Caixa* caixa);
+void abrir_caixa(Caixa** caixas);
+void fechar_caixa(Caixa** caixas);
 void imprimir_filas(Caixa** caixas);
 void imprimir_caixas(Caixa** caixas);
 void cadastrar_cliente(Caixa** caixas);
 bool tem_caixa_aberto(Caixa** caixas);
 void atender_cliente(Caixa** caixas);
+void realocar_clientes(Caixa** caixas, int idCaixa);
+int contar_caixas_abertos(Caixa** caixas);
 
 #endif

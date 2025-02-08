@@ -7,8 +7,6 @@ int main(){
     for(int i = 0; i < MAX_CAIXAS; i++){
         caixas[i] = criar_caixa(i+1);
     }
-
-    return 0;
     do{
         printf("\n----------------- Supermercado CEFET-MG ----------------- \n\n");
         printf("Selecione uma opção:\n");
@@ -26,42 +24,23 @@ int main(){
 
         switch(opcao){
             case 1:
-                printf("* Cadastrar um cliente *\n"); 
+                printf("* Cadastrar um cliente *\n\n"); 
                 cadastrar_cliente(caixas);       
                 break;
             case 2:
-                printf("* Atender um cliente *\n");
+                printf("* Atender um cliente *\n\n");
+                atender_cliente(caixas);
                 break;
             case 3:
-                printf("* Abrir caixa *\n");
-                printf("Digite o ID do caixa: ");
-                scanf("%d", &idCaixa);
-                if(idCaixa < 1 || idCaixa > MAX_CAIXAS){
-                    printf("Caixa inválido\n");
-                    break;
-                }
-                if(caixas[idCaixa-1]->estado == 1){
-                    printf("Caixa já está aberto\n");
-                    break;
-                }
-                abrir_caixa(caixas[idCaixa-1]);
+                printf("* Abrir caixa *\n\n");
+                abrir_caixa(caixas);
                 break;
             case 4:
-                printf("* Fechar um caixa *\n");
-                printf("Digite o ID do caixa: ");
-                scanf("%d", &idCaixa);
-                if(idCaixa < 1 || idCaixa > MAX_CAIXAS){
-                    printf("Caixa inválido\n");
-                    break;
-                }
-                if(caixas[idCaixa-1]->estado == 0){
-                    printf("Caixa já está fechado\n");
-                    break;
-                }
-                fechar_caixa(caixas[idCaixa-1]);
+                printf("* Fechar um caixa *\n\n");
+                fechar_caixa(caixas);
                 break;
             case 5:
-                printf("*Imprimir clientes em espera*\n");
+                printf("*Imprimir clientes em espera*\n\n");
                 imprimir_filas(caixas);
                 break;
             case 6:
