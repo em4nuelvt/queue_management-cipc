@@ -81,4 +81,28 @@ bool tem_caixa_aberto(Caixa** caixas) {
     }
     return false;
 }
-    
+
+void atender_cliente(Caixa** caixas) {
+    if(!tem_caixa_aberto(caixas)) {
+        printf("Nenhum caixa aberto\n");
+        return;
+    }
+    int idCaixa;
+    do{
+        printf("Qual dos caixas fará o atendimento? ");
+        scanf("%d", &idCaixa);
+        if (idCaixa < 1 || idCaixa > MAX_CAIXAS) {
+            printf("Caixa inválido\n");        
+        }
+        if(caixas[idCaixa-1]->estado == 0) {
+            printf("Caixa fechado\n");
+        }
+    } while (idCaixa < 1 || idCaixa > MAX_CAIXAS || caixas[idCaixa-1]->estado == 0);
+    if (fila_vazia(caixas[idCaixa-1]->fila)) {
+        printf("Fila do caixa está vazia.\n");
+        return;
+    }
+    Cliente* cliente = remover(caixas[idCaixa-1]->fila);
+    printf("Cliente %s atendido\n", cliente->nome);
+    free(cliente);
+}
