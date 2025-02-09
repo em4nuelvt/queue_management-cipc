@@ -129,6 +129,7 @@ bool tem_caixa_aberto(Caixa** caixas) {
     return false;
 }
 
+//retorna o número de caixas abertos
 int contar_caixas_abertos(Caixa** caixas) {
     int contador = 0;
     for (int i = 0; i < MAX_CAIXAS; i++) {
@@ -161,8 +162,8 @@ void atender_cliente(Caixa** caixas) {
         printf("Fila do caixa está vazia.\n");
         return;
     }
-    Cliente* cliente = remover(caixas[idCaixa-1]->fila);
-    inserirNaLista(caixas[idCaixa-1]->clientes_atendidos, cliente);
+    Cliente* cliente = remover(caixas[idCaixa-1]->fila); //desenfileira
+    inserirNaLista(caixas[idCaixa-1]->clientes_atendidos, cliente); //adiciona na lista de clientes atendidos
     printf("Cliente %s atendido\n", cliente->nome);    
 }
 
@@ -193,5 +194,28 @@ void imprimir_clientes_atendidos(Caixa** caixas) {
         printf("\n");
         imprimir_lista(caixas[i]->clientes_atendidos);
         printf("\n");
+    }
+}
+
+void liberar_estruturas(Caixa** caixas) {
+    for (int i = 0; i < MAX_CAIXAS; i++) {
+        NoFila* atual_fila = caixas[i]->fila->inicio;
+        while (atual_fila != NULL) {
+            NoFila* prox = atual_fila->prox;
+            free(atual_fila->cliente);
+            free(atual_fila);
+            atual_fila = prox;
+        }
+        free(caixas[i]->fila);
+
+        NoLista* atual_lista = caixas[i]->clientes_atendidos->inicio;
+        while (atual_lista != NULL) {
+            NoLista* prox = atual_lista->prox;
+            free(atual_lista->cliente);
+            free(atual_lista);
+            atual_lista = prox;
+        }
+        free(caixas[i]->clientes_atendidos);
+        free(caixas[i]);
     }
 }

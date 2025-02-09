@@ -63,8 +63,6 @@ int main(){
 
     }while(opcao != 0);
 
-
-
-
+    liberar_estruturas(caixas);
     return 0;
 }

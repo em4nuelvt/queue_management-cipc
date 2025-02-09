@@ -27,5 +27,6 @@ void atender_cliente(Caixa** caixas);
 void realocar_clientes(Caixa** caixas, int idCaixa);
 int contar_caixas_abertos(Caixa** caixas);
 void imprimir_clientes_atendidos(Caixa** caixas);
+void liberar_estruturas(Caixa** caixas);
 
 #endif
