@@ -2,7 +2,6 @@
 
 int main(){
     int opcao;
-    int idCaixa;
     Caixa* caixas[MAX_CAIXAS];
     for(int i = 0; i < MAX_CAIXAS; i++){
         caixas[i] = criar_caixa(i+1);
