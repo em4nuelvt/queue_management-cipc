@@ -7,11 +7,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "fila.h"
+#include "lista.h"
 
 typedef struct caixa {
     int id;
     bool estado; // 0 - fechado; 1 - aberto  
-    Fila* fila;      
+    Fila* fila;  
+    Lista* clientes_atendidos;    
 } Caixa;
 
 Caixa* criar_caixa(int id);
@@ -24,5 +26,6 @@ bool tem_caixa_aberto(Caixa** caixas);
 void atender_cliente(Caixa** caixas);
 void realocar_clientes(Caixa** caixas, int idCaixa);
 int contar_caixas_abertos(Caixa** caixas);
+void imprimir_clientes_atendidos(Caixa** caixas);
 
 #endif

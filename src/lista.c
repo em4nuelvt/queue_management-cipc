@@ -41,6 +41,7 @@ void imprimir_lista(Lista* lista) {
     int contador = 1;
     while (aux != NULL) {
         printf("%d -  %s(%d) - Quantidade de Produtos: %d", contador,aux->cliente->nome,aux->cliente->prioridade, aux->cliente->qtd_produtos);
+        printf("\n");
         contador++;
         aux = aux->prox;
     }

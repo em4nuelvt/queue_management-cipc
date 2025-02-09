@@ -15,6 +15,7 @@ int main(){
         printf("4 - Fechar um caixa\n");
         printf("5 - Imprimir clientes em espera\n");
         printf("6 - Imprimir caixas\n");
+        printf("7 - Histórico de clientes atendidos\n");
         printf("0 - Sair\n\n");
         printf("---------------------------------------------------------\n");
         printf("Digite a opção desejada: ");
@@ -45,6 +46,10 @@ int main(){
             case 6:
                 printf("*Imprimir caixas*\n");
                 imprimir_caixas(caixas);
+                break;
+            case 7:
+                printf("*Histórico de clientes atendidos*\n");
+                imprimir_clientes_atendidos(caixas);
                 break;
             case 0:
                 printf("Finalizando programa...\n");

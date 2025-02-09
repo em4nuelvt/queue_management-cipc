@@ -9,6 +9,7 @@ Caixa* criar_caixa(int id) {
     caixa->id = id;
     caixa->estado = 0;
     caixa->fila = criar_fila();
+    caixa->clientes_atendidos = criar_lista();
     return caixa;
 }
 
@@ -150,6 +151,7 @@ void atender_cliente(Caixa** caixas) {
         }
         if(caixas[idCaixa-1]->estado == 0) {
             printf("Caixa fechado\n");
+            return;
         }
     } while (idCaixa < 1 || idCaixa > MAX_CAIXAS || caixas[idCaixa-1]->estado == 0);
     if (fila_vazia(caixas[idCaixa-1]->fila)) {
@@ -157,8 +159,8 @@ void atender_cliente(Caixa** caixas) {
         return;
     }
     Cliente* cliente = remover(caixas[idCaixa-1]->fila);
-    printf("Cliente %s atendido\n", cliente->nome);
-    free(cliente);
+    inserirNaLista(caixas[idCaixa-1]->clientes_atendidos, cliente);
+    printf("Cliente %s atendido\n", cliente->nome);    
 }
 
 void realocar_clientes(Caixa** caixas, int idCaixa) {    
@@ -176,4 +178,17 @@ void realocar_clientes(Caixa** caixas, int idCaixa) {
         printf("Cliente %s realocado para o caixa %d\n", cliente->nome, caixas[idCaixaDestino]->id);
     }
     
+}
+
+void imprimir_clientes_atendidos(Caixa** caixas) {
+    for (int i = 0; i < MAX_CAIXAS; i++) {
+        printf("Caixa %d: ", caixas[i]->id);
+        if (vazia(caixas[i]->clientes_atendidos)) {
+            printf("Nenhum cliente atendido\n\n");
+            continue;
+        }
+        printf("\n");
+        imprimir_lista(caixas[i]->clientes_atendidos);
+        printf("\n");
+    }
 }
