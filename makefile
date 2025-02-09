@@ -1,25 +1,40 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -g
+CXX	     := -gcc
+CXXFLAGS := -pedantic-errors -Wall -Wextra -Werror
+LDFLAGS	 := -lm
+BUILD 	 := ./build
+OBJ_DIR  := $(BUILD)/objects
+APP_DIR  := $(BUILD)/
+TARGET   := app
+INCLUDE  := -Iinclude/
+SRC			 := $(wildcard src/*.c)
 
-SRC_DIR = src
-BUILD_DIR = build
-SRCS = $(wildcard $(SRC_DIR)/*.c)
-OBJS = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
-EXEC = app
+OBJECTS := $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-all: $(BUILD_DIR) $(EXEC)
+all: build $(APP_DIR)/$(TARGET)
 
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) $(INCLUDE) -o $@ -c $<
 
-$(EXEC): $(OBJS)
-	$(CC) $(CFLAGS) -o $(EXEC) $(OBJS)
+$(APP_DIR)/$(TARGET): $(OBJECTS)
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) $(INCLUDE) $(LDFLAGS) -o $(APP_DIR)/$(TARGET) $(OBJECTS)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+.PHONY: all build clean debug release run
 
-run: $(EXEC)
-	./$(EXEC)
+build:
+	@mkdir -p $(APP_DIR)
+	@mkdir -p $(OBJ_DIR)
+
+debug : CXXFLAGS += -DDEBUG -g
+debug: all
+
+release: CXXFLAGS += -O3
+release: all
 
 clean:
-	rm -f $(BUILD_DIR)/*.o $(EXEC)
+	-@rm -rvf $(OBJ_DIR)/*
+	-@rm -rvf $(APP_DIR)/*
+
+run:
+		./$(BUILD)/$(TARGET)
