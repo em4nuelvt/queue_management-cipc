@@ -7,11 +7,11 @@
 
 typedef struct cliente {
     char nome[100];
-    int cpf;
+    long cpf;
     int prioridade; // 1 - prioridade mais alta; 2 - prioridade média; 3 - prioridade baixa
     int qtd_produtos;
 } Cliente;
 
-Cliente* criar_cliente(char* nome, int cpf, int prioridade, int qtd_produtos);
+Cliente* criar_cliente(char* nome, long cpf, int prioridade, int qtd_produtos);
 
 #endif

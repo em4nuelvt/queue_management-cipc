@@ -18,19 +18,20 @@ void abrir_caixa(Caixa** caixas) {
     printf("Digite o ID do caixa: ");
     scanf("%d", &idCaixa);
     if(idCaixa < 1 || idCaixa > MAX_CAIXAS){
-        printf("Caixa inválido\n");
+        printf("Caixa inválido.\n");
         return;
     }
     if(caixas[idCaixa-1]->estado == 1){
-        printf("Caixa já está aberto\n");
+        printf("Caixa já está aberto.\n");
         return;
     }
     caixas[idCaixa-1]->estado = 1;    
+    printf("Caixa %d aberto.\n", idCaixa);
 }
 
 void fechar_caixa(Caixa** caixas) {
     if(!tem_caixa_aberto(caixas)) {
-        printf("Nenhum caixa aberto\n");
+        printf("Nenhum caixa aberto.\n");
         return;
     }
     int idCaixa;
@@ -39,11 +40,11 @@ void fechar_caixa(Caixa** caixas) {
         printf("Digite o ID do caixa: ");
         scanf("%d", &idCaixa);
         if(idCaixa < 1 || idCaixa > MAX_CAIXAS){
-            printf("Caixa inválido\n");
+            printf("Caixa inválido.\n");
             continue;      
         }
         if(caixas[idCaixa-1]->estado == 0){
-            printf("Caixa já está fechado\n");
+            printf("Caixa já está fechado.\n");
             continue;
         }
     }while (idCaixa < 1 || idCaixa > MAX_CAIXAS || caixas[idCaixa-1]->estado == 0);
@@ -56,7 +57,8 @@ void fechar_caixa(Caixa** caixas) {
         realocar_clientes(caixas, idCaixa-1);    
     }
 
-    caixas[idCaixa-1]->estado = 0;       
+    caixas[idCaixa-1]->estado = 0;
+    printf("Caixa %d fechado.\n", idCaixa);       
 }
 
 //imprime a situação  das filas de cada caixa
@@ -64,7 +66,7 @@ void imprimir_filas(Caixa** caixas) {
     for (int i = 0; i < MAX_CAIXAS; i++) {
         printf("Caixa %d: ", caixas[i]->id);
         if (fila_vazia(caixas[i]->fila)) {
-            printf("Fila vazia\n\n");
+            printf("Fila vazia.\n\n");
             continue;
         }
         printf("\n");
@@ -85,15 +87,16 @@ void imprimir_caixas(Caixa** caixas) {
 // pega os dados do cliente para inserir em uma fila de um caixa
 void cadastrar_cliente(Caixa** caixas) {
     if(!tem_caixa_aberto(caixas)) {
-        printf("Nenhum caixa aberto\n");
+        printf("Nenhum caixa aberto.\n");
         return;
     }
     char nome[100];
-    int cpf, prioridade, qtd_produtos;
+    long cpf;
+    int prioridade, qtd_produtos;
     printf("Digite o nome do cliente: ");
     scanf(" %[^\n]", nome);
     printf("Digite o CPF do cliente: ");
-    scanf("%d", &cpf);
+    scanf("%ld", &cpf);
     printf("Digite a prioridade do cliente (1 - prioridade mais alta; 2 - prioridade média; 3 - prioridade baixa): ");
     scanf("%d", &prioridade);
     printf("Digite a quantidade de produtos do cliente: ");
@@ -104,11 +107,11 @@ void cadastrar_cliente(Caixa** caixas) {
         printf("Em qual caixa o cliente será atendido? ");
         scanf("%d", &idCaixa);
         if (idCaixa < 1 || idCaixa > MAX_CAIXAS) {
-            printf("Caixa inválido\n");  
+            printf("Caixa inválido.\n");  
             continue;      
         }
         if(caixas[idCaixa-1]->estado == 0) {
-            printf("Caixa fechado\n");
+            printf("Caixa fechado.\n");
             continue;
         }
     } while (idCaixa < 1 || idCaixa > MAX_CAIXAS || caixas[idCaixa-1]->estado == 0);
@@ -139,7 +142,7 @@ int contar_caixas_abertos(Caixa** caixas) {
 //seleciona qual caixa removerá um cliente da fila
 void atender_cliente(Caixa** caixas) {
     if(!tem_caixa_aberto(caixas)) {
-        printf("Nenhum caixa aberto\n");
+        printf("Nenhum caixa aberto.\n");
         return;
     }
     int idCaixa;
@@ -147,10 +150,10 @@ void atender_cliente(Caixa** caixas) {
         printf("Qual dos caixas fará o atendimento? ");
         scanf("%d", &idCaixa);
         if (idCaixa < 1 || idCaixa > MAX_CAIXAS) {
-            printf("Caixa inválido\n");        
+            printf("Caixa inválido.\n");        
         }
         if(caixas[idCaixa-1]->estado == 0) {
-            printf("Caixa fechado\n");
+            printf("Caixa fechado.\n");
             return;
         }
     } while (idCaixa < 1 || idCaixa > MAX_CAIXAS || caixas[idCaixa-1]->estado == 0);
@@ -175,7 +178,7 @@ void realocar_clientes(Caixa** caixas, int idCaixa) {
             }
         }
         inserir(caixas[idCaixaDestino]->fila, cliente);
-        printf("Cliente %s realocado para o caixa %d\n", cliente->nome, caixas[idCaixaDestino]->id);
+        printf("Cliente %s realocado para o caixa %d.\n", cliente->nome, caixas[idCaixaDestino]->id);
     }
     
 }
