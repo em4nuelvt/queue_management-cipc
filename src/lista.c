@@ -15,7 +15,8 @@ bool vazia(Lista* lista) {
     return lista->inicio == NULL;
 }
 
-void inserirNaLista(Lista* lista, Cliente* cliente) {
+//insere elemento no final
+void inserirNaLista(Lista* lista, Cliente* cliente) { 
     NoLista* novo = (NoLista*) malloc(sizeof(NoLista));
     if (novo == NULL) {
         printf("Erro ao alocar memória para o nó da lista.\n");
