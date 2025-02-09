@@ -79,7 +79,7 @@ void imprimir_filas(Caixa** caixas) {
 void imprimir_caixas(Caixa** caixas) {
     for (int i = 0; i < MAX_CAIXAS; i++) {
         printf("Caixa %d: ", caixas[i]->id);
-        caixas[i]->estado == 0 ? printf("Fechado\n") : printf("Aberto\n");        
+        caixas[i]->estado == 0 ? printf("Fechado\n") : printf("Aberto(%d clientes na fila)\n", caixas[i]->fila->tamanho);        
     }
     printf("\n");
 }
