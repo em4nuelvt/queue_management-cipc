@@ -101,24 +101,33 @@ void cadastrar_cliente(Caixa** caixas) {
     }while(strlen(nome) ==0);
     printf("Digite o CPF do cliente: ");
     scanf("%ld", &cpf);
-    printf("Digite a prioridade do cliente (1 - prioridade mais alta; 2 - prioridade média; 3 - prioridade baixa): ");
-    scanf("%d", &prioridade);
+    do{
+        printf("Digite a prioridade do cliente (1 - prioridade mais alta; 2 - prioridade média; 3 - prioridade baixa): ");
+        scanf("%d", &prioridade);
+        if(prioridade < 1 || prioridade > 3){
+            printf("Prioridade inválida.\n");
+        }
+    }while(prioridade < 1 || prioridade > 3);
+    
     printf("Digite a quantidade de produtos do cliente: ");
     scanf("%d", &qtd_produtos);
     Cliente* cliente = criar_cliente(nome, cpf, prioridade, qtd_produtos);
     int idCaixa;
-    do{
+    do{//valida o caixa em que o cliente será atendido e verifica se o caixa está aberto
         printf("Em qual caixa o cliente será atendido? ");
         scanf("%d", &idCaixa);
         if (idCaixa < 1 || idCaixa > MAX_CAIXAS) {
             printf("Caixa inválido.\n");  
             continue;      
         }
-        if(caixas[idCaixa-1]->estado == 0) {
-            printf("Caixa fechado.\n");
-            continue;
+        if(idCaixa > 0 && idCaixa <= MAX_CAIXAS) {
+            if(caixas[idCaixa-1]->estado == 0) {
+                printf("Caixa fechado.\n");
+                continue;
+            }
         }
-    } while (idCaixa < 1 || idCaixa > MAX_CAIXAS || caixas[idCaixa-1]->estado == 0);
+        break;
+    } while (true);
     inserir(caixas[idCaixa-1]->fila, cliente);
 
 }
