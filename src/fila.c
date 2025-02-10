@@ -69,7 +69,7 @@ void imprimir_fila(Fila* fila) {
     NoFila* aux = fila->inicio;
     int contador = 1;
     while (aux != NULL) { // imprime a colocação na fila, o nome do cliente e a quantidade de produtos
-        printf("%d -  %s(%d) - Quantidade de Produtos: %d", contador,aux->cliente->nome,aux->cliente->prioridade, aux->cliente->qtd_produtos);
+        printf("%d -  %s(%d) - CPF: %ld - Quantidade de Produtos: %d", contador,aux->cliente->nome,aux->cliente->prioridade,aux->cliente->cpf, aux->cliente->qtd_produtos);
         printf("\n");
         aux = aux->prox;
         contador++;

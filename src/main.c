@@ -2,14 +2,13 @@
 #include <limits.h>
 
 int main(){
-
     int opcao;
     Caixa* caixas[MAX_CAIXAS];
     for(int i = 0; i < MAX_CAIXAS; i++){
         caixas[i] = criar_caixa(i+1);
     }
     do{
-        printf("\n----------------- Supermercado CEFET-MG ----------------- \n\n");
+        printf("\n----------------------- Supermercado CEFET-MG ----------------------- \n\n");
         printf("Selecione uma opção:\n\n");
         printf("1 - Cadastrar um cliente\n");
         printf("2 - Atender um cliente\n");
@@ -21,7 +20,7 @@ int main(){
         printf("0 - Sair\n\n");        
         printf("Digite a opção desejada: ");
         scanf("%d", &opcao);
-        printf("---------------------------------------------------------\n\n");
+        printf("---------------------------------------------------------------------\n\n");
 
         switch(opcao){
             case 1:

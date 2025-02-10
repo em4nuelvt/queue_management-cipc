@@ -90,11 +90,15 @@ void cadastrar_cliente(Caixa** caixas) {
         printf("Nenhum caixa aberto.\n");
         return;
     }
-    char nome[100];
+    char nome[101];
     long cpf;
     int prioridade, qtd_produtos;
-    printf("Digite o nome do cliente: ");
-    scanf(" %[^\n]", nome);
+    do{//loop para validar o nome do cliente (não pode ser vazio)      
+        printf("Digite o nome do cliente: ");
+        setbuf(stdin, NULL);
+        fgets(nome, 100, stdin);
+        nome[strlen(nome)-1] = '\0';
+    }while(strlen(nome) ==0);
     printf("Digite o CPF do cliente: ");
     scanf("%ld", &cpf);
     printf("Digite a prioridade do cliente (1 - prioridade mais alta; 2 - prioridade média; 3 - prioridade baixa): ");
